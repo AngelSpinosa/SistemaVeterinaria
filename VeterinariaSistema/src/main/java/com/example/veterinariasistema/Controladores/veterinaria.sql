@@ -1,0 +1,66 @@
+
+CREATE DATABASE veterinaria;
+
+USE veterinaria;
+
+-- Crear la tabla Dueños
+CREATE TABLE Dueños (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  telefono VARCHAR(15),
+  direccion VARCHAR(100)
+);
+
+--Inserts de la tabla Dueños
+INSERT INTO Dueños VALUES (66301, 'LUIS MENDOZA', '3139586605', 'CALLE 1');
+INSERT INTO Dueños VALUES (05627, 'MARTIN AGUILAR', '3368069450', 'CALLE 2');
+INSERT INTO Dueños VALUES (26833, 'LAURA HERNANDEZ', '5702460190', 'CALLE 3');
+INSERT INTO Dueños VALUES (60503, 'RAUL PEREZ', '7862376401', 'CALLE 4');
+
+-- Crear la tabla Mascotas
+CREATE TABLE Mascotas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  especie VARCHAR(50),
+  raza VARCHAR(50),
+  edad INT,
+  dueño_id INT,
+  FOREIGN KEY (dueño_id) REFERENCES Dueños(id)
+);
+
+--Inserts de la tabla mascotas
+INSERT INTO Mascotas VALUES (36906, 'ARGOS', 'PERRO', 'MIXTO', 5, 66301);
+INSERT INTO Mascotas VALUES (87725, 'AMBAR', 'PERRO', 'LABRADOR', 6, 05627);
+INSERT INTO Mascotas VALUES (24032, 'ZEUS', 'GATO', 'PERSA', 10, 26833);
+INSERT INTO Mascotas VALUES (52714, 'CANELO', 'PERRO', 'MIXTO', 16, 60503);
+
+-- Crear la tabla Veterinarios
+CREATE TABLE Veterinarios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  telefono VARCHAR(15),
+  especialidad VARCHAR(50)
+);
+
+--Inserts de la tabla Veterinarios
+INSERT INTO Veterinarios VALUES (97769, 'ARMANDO RODRIGUEZ', '151789526', 'CIRUJIA');
+INSERT INTO Veterinarios VALUES (41685, 'SOFIA LUNA', '192606260', 'FISIOTERAPIA');
+INSERT INTO Veterinarios VALUES (66684, 'PEDRO MORA', '013963249', 'REHABILITACION');
+INSERT INTO Veterinarios VALUES (62373, 'ASHLEY BLANCO', '175634125', 'GENERAL');
+
+-- Crear la tabla Citas
+CREATE TABLE Citas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  fecha DATE,
+  hora TIME,
+  mascota_id INT,
+  veterinario_id INT,
+  FOREIGN KEY (mascota_id) REFERENCES Mascotas(id),
+  FOREIGN KEY (veterinario_id) REFERENCES Veterinarios(id)
+);
+
+--Inserts de la tabla Citas
+INSERT INTO Citas VALUES (07179, '2023-06-13', '10:00:00', 36906, 97769);
+INSERT INTO Citas VALUES (81068, '2023-06-14', '15:30:00', 87725, 41685);
+INSERT INTO Citas VALUES (92772, '2023-06-15', '14:45:00', 24032, 66684);
+INSERT INTO Citas VALUES (94311, '2023-06-16', '09:15:00', 52714, 62373);
